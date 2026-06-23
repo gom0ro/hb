@@ -5,6 +5,34 @@ import { useTranslation } from 'react-i18next'
 import { submitLead } from '../../lib/api'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
 
+type FieldErrors = {
+  name?: string
+  contact?: string
+  description?: string
+}
+
+function validateTelegram(value: string): string | undefined {
+  if (!value) return undefined
+  if (!value.startsWith('@')) return 'Must start with @'
+  const username = value.slice(1)
+  if (username.length < 3) return 'Too short'
+  if (username.length > 32) return 'Too long'
+  if (!/^[a-zA-Z0-9_]+$/.test(username)) return 'Only letters, numbers, underscores'
+  return undefined
+}
+
+function validateName(value: string): string | undefined {
+  if (!value.trim()) return 'Required'
+  if (value.trim().length < 2) return 'At least 2 characters'
+  return undefined
+}
+
+function validateDescription(value: string): string | undefined {
+  if (!value.trim()) return 'Required'
+  if (value.trim().length < 10) return 'At least 10 characters'
+  return undefined
+}
+
 export function ContactForm() {
   const { t } = useTranslation()
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -15,6 +43,8 @@ export function ContactForm() {
   const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+  const [submitAttempted, setSubmitAttempted] = useState(false)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -27,8 +57,35 @@ export function ContactForm() {
     return () => observer.disconnect()
   }, [])
 
+  const errors: FieldErrors = {}
+  if ((touched.name || submitAttempted) && name !== undefined) {
+    const e = validateName(name)
+    if (e) errors.name = e
+  }
+  if ((touched.contact || submitAttempted) && contact !== undefined) {
+    const e = validateTelegram(contact)
+    if (e) errors.contact = e
+  }
+  if ((touched.description || submitAttempted) && description !== undefined) {
+    const e = validateDescription(description)
+    if (e) errors.description = e
+  }
+
+  function handleBlur(field: string) {
+    setTouched((prev) => ({ ...prev, [field]: true }))
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    setSubmitAttempted(true)
+    setTouched({ name: true, contact: true, description: true })
+
+    const hasErrors =
+      validateName(name) ||
+      validateTelegram(contact) ||
+      validateDescription(description)
+    if (hasErrors) return
+
     setStatus('loading')
     setErrorMsg('')
 
@@ -38,6 +95,8 @@ export function ContactForm() {
       setName('')
       setContact('')
       setDescription('')
+      setTouched({})
+      setSubmitAttempted(false)
     } catch (err) {
       setStatus('error')
       const msg = err instanceof Error ? err.message : ''
@@ -50,6 +109,13 @@ export function ContactForm() {
     }
   }
 
+  const inputClass = (hasError?: string) =>
+    `w-full rounded-xl border bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-muted)]/50 outline-none transition-all duration-300 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 hover:border-[var(--color-border-hover)] resize-none ${
+      hasError
+        ? 'border-red-400/60 focus:border-red-400/60 focus:ring-red-400/10'
+        : 'border-[var(--color-border)]'
+    }`
+
   return (
     <section id="contact" className="py-32">
       <div ref={sectionRef} className="mx-auto max-w-6xl px-6">
@@ -59,7 +125,7 @@ export function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-xl"
+            className="relative overflow-hidden rounded-3xl border border-[var(--color-border)] bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-xl"
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,112,243,0.08),transparent_60%)]" />
             
@@ -82,7 +148,7 @@ export function ContactForm() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="text-xs font-medium uppercase tracking-widest text-muted mb-4"
+                  className="text-xs font-medium uppercase tracking-widest text-[var(--color-muted)] mb-4"
                 >
                   {t('contact.getInTouch')}
                 </motion.p>
@@ -91,7 +157,7 @@ export function ContactForm() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="text-3xl sm:text-4xl font-semibold tracking-tight text-white mb-4"
+                  className="text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-foreground)] mb-4"
                 >
                   {t('contact.title')}
                 </motion.h2>
@@ -100,7 +166,7 @@ export function ContactForm() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
-                  className="text-muted leading-relaxed mb-8"
+                  className="text-[var(--color-muted)] leading-relaxed mb-8"
                 >
                   {t('contact.description')}
                 </motion.p>
@@ -119,7 +185,7 @@ export function ContactForm() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.5 + i * 0.1 }}
-                        className="flex items-center gap-2.5 text-sm text-muted hover:text-white transition-colors"
+                        className="flex items-center gap-2.5 text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
                       >
                         <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                         {item}
@@ -142,57 +208,84 @@ export function ContactForm() {
                   >
                     <CheckCircle2 className="h-12 w-12 text-emerald-400 mb-4" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{t('contact.successTitle')}</h3>
-                  <p className="text-muted text-sm">{t('contact.successText')}</p>
+                  <h3 className="text-xl font-semibold text-[var(--color-foreground)] mb-2">{t('contact.successTitle')}</h3>
+                  <p className="text-[var(--color-muted)] text-sm">{t('contact.successText')}</p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div>
-                    <label htmlFor="name" className="block text-xs font-medium text-muted mb-2 transition-colors group-focus-within:text-white">
+                    <label htmlFor="name" className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors">
                       {t('contact.name')}
                     </label>
                     <input
                       id="name"
                       type="text"
-                      required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full rounded-xl border border-white/[0.08] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-muted/50 outline-none transition-all duration-300 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 hover:border-white/15"
+                      onBlur={() => handleBlur('name')}
+                      className={inputClass(errors.name)}
                       placeholder={t('contact.namePlaceholder')}
                     />
+                    {errors.name && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs text-red-400 mt-1.5"
+                      >
+                        {errors.name}
+                      </motion.p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="contact" className="block text-xs font-medium text-muted mb-2 transition-colors group-focus-within:text-white">
+                    <label htmlFor="contact" className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors">
                       {t('contact.telegram')}
                     </label>
                     <input
                       id="contact"
                       type="text"
-                      required
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
-                      className="w-full rounded-xl border border-white/[0.08] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-muted/50 outline-none transition-all duration-300 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 hover:border-white/15"
+                      onBlur={() => handleBlur('contact')}
+                      className={inputClass(errors.contact)}
                       placeholder={t('contact.telegramPlaceholder')}
                     />
+                    {errors.contact && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs text-red-400 mt-1.5"
+                      >
+                        {errors.contact}
+                      </motion.p>
+                    )}
                   </div>
 
                   <div>
                     <label
                       htmlFor="description"
-                      className="block text-xs font-medium text-muted mb-2 transition-colors group-focus-within:text-white"
+                      className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors"
                     >
                       {t('contact.projectDescription')}
                     </label>
                     <textarea
                       id="description"
-                      required
                       rows={4}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      className="w-full rounded-xl border border-white/[0.08] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-muted/50 outline-none transition-all duration-300 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 hover:border-white/15 resize-none"
+                      onBlur={() => handleBlur('description')}
+                      className={inputClass(errors.description)}
                       placeholder={t('contact.projectPlaceholder')}
                     />
+                    {errors.description && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-xs text-red-400 mt-1.5"
+                      >
+                        {errors.description}
+                      </motion.p>
+                    )}
                   </div>
 
                   {/* Honeypot — hidden from users, catches bots */}
