@@ -3,7 +3,6 @@ import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { Hero } from './components/sections/Hero'
 import { TrustStrip } from './components/sections/TrustStrip'
-import { Logos3 } from './components/sections/Logos3'
 import { Services } from './components/sections/Services'
 import { Projects } from './components/sections/Projects'
 import { TechStack } from './components/sections/TechStack'
@@ -41,7 +40,6 @@ function App() {
       <main>
         <Hero />
         <TrustStrip />
-        <Logos3 />
         <Services />
         <Projects />
         <TechStack />

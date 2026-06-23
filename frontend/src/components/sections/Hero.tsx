@@ -51,7 +51,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mx-auto max-w-4xl text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] mb-6"
+          className="mx-auto max-w-4xl text-3xl sm:text-5xl lg:text-7xl font-semibold tracking-tight leading-[1.15] mb-6 break-words"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
