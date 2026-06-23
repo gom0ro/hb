@@ -1,4 +1,4 @@
-import { useRef, useId, useEffect, type CSSProperties } from 'react';
+import { useRef, useId, useEffect, useState, type CSSProperties } from 'react';
 import { animate, useMotionValue, type AnimationPlaybackControls } from 'framer-motion';
 
 interface ResponsiveImage {
@@ -65,36 +65,46 @@ export function ShadowOverlay({
     const hueRotateMotionValue = useMotionValue(180);
     const hueRotateAnimation = useRef<AnimationPlaybackControls | null>(null);
 
+    const [reducedMotion, setReducedMotion] = useState(
+        () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+    useEffect(() => {
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
+
     const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
 
     useEffect(() => {
-        if (feColorMatrixRef.current && animationEnabled) {
+        if (!feColorMatrixRef.current || !animationEnabled || reducedMotion) return
+
+        if (hueRotateAnimation.current) {
+            hueRotateAnimation.current.stop();
+        }
+        hueRotateMotionValue.set(0);
+        hueRotateAnimation.current = animate(hueRotateMotionValue, 360, {
+            duration: animationDuration / 25,
+            repeat: Infinity,
+            repeatType: "loop",
+            repeatDelay: 0,
+            ease: "linear",
+            delay: 0,
+            onUpdate: (value: number) => {
+                if (feColorMatrixRef.current) {
+                    feColorMatrixRef.current.setAttribute("values", String(value));
+                }
+            }
+        });
+
+        return () => {
             if (hueRotateAnimation.current) {
                 hueRotateAnimation.current.stop();
             }
-            hueRotateMotionValue.set(0);
-            hueRotateAnimation.current = animate(hueRotateMotionValue, 360, {
-                duration: animationDuration / 25,
-                repeat: Infinity,
-                repeatType: "loop",
-                repeatDelay: 0,
-                ease: "linear",
-                delay: 0,
-                onUpdate: (value: number) => {
-                    if (feColorMatrixRef.current) {
-                        feColorMatrixRef.current.setAttribute("values", String(value));
-                    }
-                }
-            });
-
-            return () => {
-                if (hueRotateAnimation.current) {
-                    hueRotateAnimation.current.stop();
-                }
-            };
-        }
-    }, [animationEnabled, animationDuration, hueRotateMotionValue]);
+        };
+    }, [animationEnabled, animationDuration, hueRotateMotionValue, reducedMotion]);
 
     return (
         <div

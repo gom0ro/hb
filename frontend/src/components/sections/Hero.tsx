@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -6,8 +7,32 @@ import { Button } from '../ui/Button'
 
 export function Hero() {
   const { t } = useTranslation()
+  const sectionRef = useRef<HTMLElement>(null)
+  const [inView, setInView] = useState(true)
+  const [reduced, setReduced] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || reduced) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [reduced])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <AnimatedGrid />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 text-center">
@@ -67,17 +92,20 @@ export function Hero() {
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
-      {/* Floating decorative elements */}
-      <motion.div
-        className="absolute top-1/4 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"
-        animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 left-0 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"
-        animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
+      {!reduced && (
+        <>
+          <motion.div
+            className="absolute top-1/4 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"
+            animate={inView ? { y: [0, -20, 0], x: [0, 20, 0] } : { y: -10, x: 10 }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 left-0 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"
+            animate={inView ? { y: [0, 30, 0], x: [0, -20, 0] } : { y: 15, x: -10 }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
+        </>
+      )}
     </section>
   )
 }

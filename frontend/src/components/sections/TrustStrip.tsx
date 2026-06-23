@@ -1,11 +1,25 @@
 import { GitBranch, Zap, FolderGit2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useRef, useEffect, useState } from 'react'
 import { metrics } from '../../data/content'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
 import { motion } from 'framer-motion'
 
 export function TrustStrip() {
   const { t } = useTranslation()
+  const sectionRef = useRef<HTMLElement>(null)
+  const [inView, setInView] = useState(true)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const logos = [
     { icon: FolderGit2, label: t('trust.openSource') },
@@ -13,16 +27,16 @@ export function TrustStrip() {
     { icon: Zap, label: t('trust.performance') },
   ]
   return (
-    <section className="border-y border-white/[0.06] bg-surface relative overflow-hidden">
+    <section ref={sectionRef} className="border-y border-white/[0.06] bg-surface relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          animate={{ opacity: [0.3, 0.5, 0.3] }}
+          animate={inView ? { opacity: [0.3, 0.5, 0.3] } : { opacity: 0.4 }}
           transition={{ duration: 8, repeat: Infinity }}
           className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{ opacity: [0.2, 0.4, 0.2] }}
+          animate={inView ? { opacity: [0.2, 0.4, 0.2] } : { opacity: 0.3 }}
           transition={{ duration: 10, repeat: Infinity, delay: 1 }}
           className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-l from-emerald-500/10 to-blue-500/10 rounded-full blur-3xl"
         />

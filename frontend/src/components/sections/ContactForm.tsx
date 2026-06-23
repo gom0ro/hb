@@ -1,18 +1,31 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { submitLead } from '../../lib/api'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
 
 export function ContactForm() {
   const { t } = useTranslation()
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [inView, setInView] = useState(true)
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
   const [description, setDescription] = useState('')
   const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -39,7 +52,7 @@ export function ContactForm() {
 
   return (
     <section id="contact" className="py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div ref={sectionRef} className="mx-auto max-w-6xl px-6">
         <RevealOnScroll>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -52,12 +65,12 @@ export function ContactForm() {
             
             {/* Decorative elements */}
             <motion.div
-              animate={{ rotate: [0, 10, 0] }}
+              animate={inView ? { rotate: [0, 10, 0] } : { rotate: 5 }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-[-50px] right-[-50px] w-40 h-40 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"
             />
             <motion.div
-              animate={{ rotate: [360, 0] }}
+              animate={inView ? { rotate: [360, 0] } : { rotate: 0 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute bottom-[-50px] left-[-50px] w-48 h-48 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"
             />
@@ -124,7 +137,7 @@ export function ContactForm() {
                   transition={{ type: "spring", damping: 15 }}
                 >
                   <motion.div
-                    animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+                    animate={inView ? { scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] } : { scale: 1 }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     <CheckCircle2 className="h-12 w-12 text-emerald-400 mb-4" />

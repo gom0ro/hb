@@ -2,18 +2,37 @@ import { useEffect, useRef } from 'react'
 
 export function AnimatedGrid() {
   const gridRef = useRef<HTMLDivElement>(null)
+  const isTouchRef = useRef(false)
+
+  useEffect(() => {
+    isTouchRef.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+  }, [])
 
   useEffect(() => {
     const grid = gridRef.current
     if (!grid) return
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        grid.classList.toggle('anim-paused', !entry.isIntersecting)
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(grid)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (isTouchRef.current) return
+    const grid = gridRef.current
+    if (!grid) return
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!grid) return
-      const { clientX, clientY } = e
+      if (grid.classList.contains('anim-paused')) return
       const rect = grid.getBoundingClientRect()
-      const x = (clientX - rect.left) / rect.width
-      const y = (clientY - rect.top) / rect.height
-      
+      const x = (e.clientX - rect.left) / rect.width
+      const y = (e.clientY - rect.top) / rect.height
       const intensity = Math.min(Math.max(x * y * 2, 0.3), 1)
       grid.style.setProperty('--mouse-x', `${x}`)
       grid.style.setProperty('--mouse-y', `${y}`)
@@ -25,16 +44,15 @@ export function AnimatedGrid() {
   }, [])
 
   return (
-    <div 
+    <div
       ref={gridRef}
       className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
-      style={{ 
+      style={{
         '--mouse-x': '0.5',
         '--mouse-y': '0.5',
         '--intensity': '0.5',
       } as React.CSSProperties}
     >
-      {/* Animated Grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -48,28 +66,24 @@ export function AnimatedGrid() {
           animation: 'gridMove 20s linear infinite',
         }}
       />
-      
-      {/* Interactive Gradient Spotlight */}
-      <div 
+
+      <div
         className="absolute inset-0 transition-opacity duration-300"
         style={{
           background: 'radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0,112,243,0.15) 0%, transparent 40%)',
           opacity: 'var(--intensity)',
         }}
       />
-      
-      {/* Moving Gradient Flow */}
-      <div 
+
+      <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
           background: 'conic-gradient(from 180deg at 50% 0%, rgba(0,112,243,0.1) 0deg, transparent 120deg, rgba(0,112,243,0.1) 180deg, transparent 300deg)',
           animation: 'gradientFlow 30s linear infinite',
         }}
       />
-      
-      {/* Noise Texture */}
+
       <div className="absolute inset-0 noise" />
     </div>
   )
 }
-

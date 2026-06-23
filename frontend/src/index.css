@@ -330,3 +330,37 @@ html {
   opacity: 0.03;
   pointer-events: none;
 }
+
+/* ====== Performance & Reduced Motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Pause heavy animations when element scrolled out of view */
+.anim-paused [style*="animation"] {
+  animation-play-state: paused !important;
+}
+
+/* Performance hints for animating elements */
+[style*="animation"] {
+  will-change: transform, opacity;
+}
+
+/* Content-visibility for sections below the fold */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}
+
+/* First section (hero) should render immediately */
+section:first-child {
+  content-visibility: visible;
+}

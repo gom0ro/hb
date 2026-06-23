@@ -32,7 +32,7 @@ export function AnimatedBackground() {
     observer.observe(document.documentElement, { attributeFilter: ['data-theme'] })
 
     let animationFrameId: number
-    let particles: Particle[] = []
+    const particles: Particle[] = []
     let width = canvas.width
     let height = canvas.height
 
