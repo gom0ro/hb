@@ -112,7 +112,7 @@ export function ContactForm() {
         return
       }
       const text = encodeURIComponent(
-        `Hi! My name is ${name}.\nMy phone: ${contact}\nProject:\n${description}`
+        t('contact.whatsappMessage', { name, contact, description })
       )
       window.open(`https://wa.me/${businessPhone}?text=${text}`, '_blank')
       setStatus('success')

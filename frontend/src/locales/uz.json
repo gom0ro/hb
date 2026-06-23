@@ -103,7 +103,8 @@
     "invalidTelegram": "Noto'g'ri Telegram username",
     "invalidPhone": "Noto'g'ri telefon raqami",
     "descTooShort": "Tavsif juda qisqa",
-    "errorMsg": "Nimadir noto'g'ri ketdi"
+    "errorMsg": "Nimadir noto'g'ri ketdi",
+    "whatsappMessage": "Salom! Mening ismim {{name}}.\nTelefonim: {{contact}}\nLoyiha:\n{{description}}"
   },
   "footer": {
     "allRights": "Barcha huquqlar himoyalangan."

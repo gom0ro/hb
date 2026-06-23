@@ -103,7 +103,8 @@
     "invalidTelegram": "Қате Telegram пайдаланушы аты",
     "invalidPhone": "Қате телефон нөмірі",
     "descTooShort": "Сипаттама тым қысқа",
-    "errorMsg": "Бірдеңе дұрыс болмады"
+    "errorMsg": "Бірдеңе дұрыс болмады",
+    "whatsappMessage": "Сәлем! Менің атым {{name}}.\nТелефоным: {{contact}}\nЖоба:\n{{description}}"
   },
   "footer": {
     "allRights": "Барлық құқықтар қорғалған."

@@ -103,7 +103,8 @@
     "invalidTelegram": "Некорректный Telegram username",
     "invalidPhone": "Неверный номер телефона",
     "descTooShort": "Описание слишком короткое",
-    "errorMsg": "Что-то пошло не так"
+    "errorMsg": "Что-то пошло не так",
+    "whatsappMessage": "Здравствуйте! Меня зовут {{name}}.\nМой телефон: {{contact}}\nПроект:\n{{description}}"
   },
   "footer": {
     "allRights": "Все права защищены."

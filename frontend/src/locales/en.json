@@ -103,7 +103,8 @@
     "invalidTelegram": "Invalid Telegram username",
     "invalidPhone": "Invalid phone number",
     "descTooShort": "Description too short",
-    "errorMsg": "Something went wrong"
+    "errorMsg": "Something went wrong",
+    "whatsappMessage": "Hi! My name is {{name}}.\nMy phone: {{contact}}\nProject:\n{{description}}"
   },
   "footer": {
     "allRights": "All rights reserved."
