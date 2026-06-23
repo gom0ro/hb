@@ -18,8 +18,14 @@ async def create_lead(
     payload: LeadCreate,
     db: Session = Depends(get_db),
 ):
+    contact_method = payload.contact_method or "telegram"
+
     spam_reason = is_spam(
-        payload.name, payload.contact, payload.description, payload.honeypot
+        payload.name,
+        payload.contact,
+        payload.description,
+        payload.honeypot,
+        contact_method,
     )
     if spam_reason:
         raise HTTPException(status_code=400, detail=spam_reason)
@@ -29,6 +35,7 @@ async def create_lead(
     lead = Lead(
         name=payload.name.strip(),
         contact=payload.contact.strip(),
+        contact_method=contact_method,
         description=payload.description.strip(),
         ip_address=ip,
     )

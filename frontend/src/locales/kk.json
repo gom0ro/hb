@@ -87,6 +87,8 @@
     "freeConsultation": "Тегін алғашқы кеңес",
     "fixedPrice": "Бекітілген баға немесе сағаттық",
     "nda": "NDA қолжетімді",
+    "contactVia": "Байланыс түрі",
+    "phone": "Телефон",
     "name": "Аты",
     "namePlaceholder": "Сіздің атыңыз",
     "telegram": "Telegram",
@@ -99,6 +101,7 @@
     "successText": "Біз жақын арада сізге хабарласамыз.",
     "invalidSubmission": "Қате жіберу",
     "invalidTelegram": "Қате Telegram пайдаланушы аты",
+    "invalidPhone": "Қате телефон нөмірі",
     "descTooShort": "Сипаттама тым қысқа",
     "errorMsg": "Бірдеңе дұрыс болмады"
   },

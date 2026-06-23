@@ -12,6 +12,7 @@ class Lead(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     contact: Mapped[str] = mapped_column(String(120), nullable=False)
+    contact_method: Mapped[str] = mapped_column(String(20), nullable=False, default="telegram")
     description: Mapped[str] = mapped_column(Text, nullable=False)
     ip_address: Mapped[str | None] = mapped_column(String(45), nullable=True)
     created_at: Mapped[datetime] = mapped_column(

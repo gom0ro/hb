@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react'
 import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { submitLead } from '../../lib/api'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
+
+type ContactMethod = 'telegram' | 'whatsapp'
 
 type FieldErrors = {
   name?: string
@@ -18,6 +20,13 @@ function validateTelegram(value: string): string | undefined {
   if (username.length < 3) return 'Too short'
   if (username.length > 32) return 'Too long'
   if (!/^[a-zA-Z0-9_]+$/.test(username)) return 'Only letters, numbers, underscores'
+  return undefined
+}
+
+function validatePhone(value: string): string | undefined {
+  if (!value) return undefined
+  const digits = value.replace(/[\s\-\(\)]/g, '')
+  if (!/^\+?\d{7,15}$/.test(digits)) return 'Enter a valid phone number'
   return undefined
 }
 
@@ -37,6 +46,7 @@ export function ContactForm() {
   const { t } = useTranslation()
   const sectionRef = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(true)
+  const [method, setMethod] = useState<ContactMethod>('telegram')
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
   const [description, setDescription] = useState('')
@@ -63,7 +73,8 @@ export function ContactForm() {
     if (e) errors.name = e
   }
   if ((touched.contact || submitAttempted) && contact !== undefined) {
-    const e = validateTelegram(contact)
+    const fn = method === 'whatsapp' ? validatePhone : validateTelegram
+    const e = fn(contact)
     if (e) errors.contact = e
   }
   if ((touched.description || submitAttempted) && description !== undefined) {
@@ -75,22 +86,55 @@ export function ContactForm() {
     setTouched((prev) => ({ ...prev, [field]: true }))
   }
 
+  function switchMethod(m: ContactMethod) {
+    setMethod(m)
+    setContact('')
+    setTouched((prev) => ({ ...prev, contact: false }))
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setSubmitAttempted(true)
     setTouched({ name: true, contact: true, description: true })
 
+    const contactFn = method === 'whatsapp' ? validatePhone : validateTelegram
     const hasErrors =
       validateName(name) ||
-      validateTelegram(contact) ||
+      contactFn(contact) ||
       validateDescription(description)
     if (hasErrors) return
+
+    if (method === 'whatsapp') {
+      const businessPhone = import.meta.env.VITE_WHATSAPP_NUMBER
+      if (!businessPhone) {
+        setErrorMsg('WhatsApp number not configured')
+        setStatus('error')
+        return
+      }
+      const text = encodeURIComponent(
+        `Hi! My name is ${name}.\nMy phone: ${contact}\nProject:\n${description}`
+      )
+      window.open(`https://wa.me/${businessPhone}?text=${text}`, '_blank')
+      setStatus('success')
+      setName('')
+      setContact('')
+      setDescription('')
+      setTouched({})
+      setSubmitAttempted(false)
+      return
+    }
 
     setStatus('loading')
     setErrorMsg('')
 
     try {
-      await submitLead({ name, contact, description, honeypot })
+      await submitLead({
+        name,
+        contact,
+        contact_method: method,
+        description,
+        honeypot,
+      })
       setStatus('success')
       setName('')
       setContact('')
@@ -103,6 +147,7 @@ export function ContactForm() {
       const errorMap: Record<string, string> = {
         'Invalid submission': t('contact.invalidSubmission'),
         'Invalid Telegram username': t('contact.invalidTelegram'),
+        'Invalid phone number': t('contact.invalidPhone') || 'Invalid phone number',
         'Description too short': t('contact.descTooShort'),
       }
       setErrorMsg(errorMap[msg] || msg || t('contact.errorMsg'))
@@ -129,7 +174,6 @@ export function ContactForm() {
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,112,243,0.08),transparent_60%)]" />
             
-            {/* Decorative elements */}
             <motion.div
               animate={inView ? { rotate: [0, 10, 0] } : { rotate: 5 }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -238,8 +282,37 @@ export function ContactForm() {
                   </div>
 
                   <div>
+                    <label className="block text-xs font-medium text-[var(--color-muted)] mb-2">
+                      {t('contact.contactVia') || 'Contact via'}
+                    </label>
+                    <div className="flex gap-2 mb-3">
+                      <button
+                        type="button"
+                        onClick={() => switchMethod('telegram')}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition-all ${
+                          method === 'telegram'
+                            ? 'bg-blue-500/20 text-blue-400 ring-1 ring-blue-500/40'
+                            : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
+                        }`}
+                      >
+                        <MessageCircle className="h-3.5 w-3.5" />
+                        Telegram
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => switchMethod('whatsapp')}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition-all ${
+                          method === 'whatsapp'
+                            ? 'bg-green-500/20 text-green-400 ring-1 ring-green-500/40'
+                            : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
+                        }`}
+                      >
+                        <Phone className="h-3.5 w-3.5" />
+                        WhatsApp
+                      </button>
+                    </div>
                     <label htmlFor="contact" className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors">
-                      {t('contact.telegram')}
+                      {method === 'whatsapp' ? (t('contact.phone') || 'Phone') : t('contact.telegram')}
                     </label>
                     <input
                       id="contact"
@@ -248,7 +321,7 @@ export function ContactForm() {
                       onChange={(e) => setContact(e.target.value)}
                       onBlur={() => handleBlur('contact')}
                       className={inputClass(errors.contact)}
-                      placeholder={t('contact.telegramPlaceholder')}
+                      placeholder={method === 'whatsapp' ? '+1234567890' : t('contact.telegramPlaceholder')}
                     />
                     {errors.contact && (
                       <motion.p
@@ -288,7 +361,6 @@ export function ContactForm() {
                     )}
                   </div>
 
-                  {/* Honeypot — hidden from users, catches bots */}
                   <input
                     type="text"
                     name="website"

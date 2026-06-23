@@ -87,6 +87,8 @@
     "freeConsultation": "Free initial consultation",
     "fixedPrice": "Fixed-price or hourly",
     "nda": "NDA available",
+    "contactVia": "Contact via",
+    "phone": "Phone",
     "name": "Name",
     "namePlaceholder": "Your name",
     "telegram": "Telegram",
@@ -99,6 +101,7 @@
     "successText": "We'll get back to you shortly.",
     "invalidSubmission": "Invalid submission",
     "invalidTelegram": "Invalid Telegram username",
+    "invalidPhone": "Invalid phone number",
     "descTooShort": "Description too short",
     "errorMsg": "Something went wrong"
   },

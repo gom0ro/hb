@@ -87,6 +87,8 @@
     "freeConsultation": "Bepul dastlabki maslahat",
     "fixedPrice": "Qat'iy narx yoki soatlik",
     "nda": "NDA mavjud",
+    "contactVia": "Aloqa usuli",
+    "phone": "Telefon",
     "name": "Ismingiz",
     "namePlaceholder": "Sizning ismingiz",
     "telegram": "Telegram",
@@ -99,6 +101,7 @@
     "successText": "Biz tez orada siz bilan bog'lanamiz.",
     "invalidSubmission": "Noto'g'ri yuborish",
     "invalidTelegram": "Noto'g'ri Telegram username",
+    "invalidPhone": "Noto'g'ri telefon raqami",
     "descTooShort": "Tavsif juda qisqa",
     "errorMsg": "Nimadir noto'g'ri ketdi"
   },

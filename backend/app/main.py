@@ -17,6 +17,14 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 Base.metadata.create_all(bind=engine)
 
+# migration: add contact_method column for SQLite
+import sqlalchemy as sa
+inspector = sa.inspect(engine)
+if "contact_method" not in [c["name"] for c in inspector.get_columns("leads")]:
+    with engine.connect() as conn:
+        conn.execute(sa.text("ALTER TABLE leads ADD COLUMN contact_method VARCHAR(20) NOT NULL DEFAULT 'telegram'"))
+        conn.commit()
+
 origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
 
 app.add_middleware(

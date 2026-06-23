@@ -1,6 +1,7 @@
 export interface LeadPayload {
   name: string
   contact: string
+  contact_method?: string
   description: string
   honeypot?: string
 }
