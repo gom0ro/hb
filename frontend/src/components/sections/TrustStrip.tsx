@@ -45,7 +45,7 @@ export function TrustStrip() {
       <div className="mx-auto max-w-6xl px-6 py-12 relative z-10">
         <RevealOnScroll>
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-            <div className="flex items-center gap-8 sm:gap-12">
+            <div className="flex items-center justify-center gap-4 sm:gap-8 lg:gap-12 flex-wrap">
               {logos.map(({ icon: Icon, label }) => (
                 <motion.div
                   key={label}
@@ -64,7 +64,7 @@ export function TrustStrip() {
               ))}
             </div>
 
-            <div className="flex items-center gap-10 sm:gap-16">
+            <div className="flex items-center justify-center gap-6 sm:gap-10 lg:gap-16 flex-wrap">
               {metrics.map((metric) => (
                 <motion.div
                   key={metric.label}
