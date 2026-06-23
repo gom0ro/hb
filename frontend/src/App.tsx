@@ -11,6 +11,9 @@ import { FAQ } from './components/sections/FAQ'
 import { ContactForm } from './components/sections/ContactForm'
 import { ShadowOverlay } from './components/ui/ShadowOverlay'
 import { StaticBackground } from './components/ui/StaticBackground'
+import { ErrorBoundary } from './components/ui/ErrorBoundary'
+import { SEO } from './components/ui/SEO'
+import { Analytics } from './components/ui/Analytics'
 
 function getIsMobile() {
   return typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0)
@@ -25,7 +28,9 @@ function App() {
   const isMobile = useSyncExternalStore(subscribeIsMobile, getIsMobile, () => false)
 
   return (
-    <>
+    <ErrorBoundary>
+      <SEO />
+      <Analytics />
       {isMobile ? (
         <StaticBackground />
       ) : (
@@ -48,7 +53,7 @@ function App() {
         <ContactForm />
       </main>
       <Footer />
-    </>
+    </ErrorBoundary>
   )
 }
 
