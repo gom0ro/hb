@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "services": "Xizmatlar",
+    "work": "Ishlar",
+    "faq": "FAQ",
+    "stack": "Stack",
+    "about": "Men haqimda",
+    "startProject": "Loyihani boshlash"
+  },
+  "hero": {
+    "available": "Yangi loyihalar uchun ochiq",
+    "headline": "Tez, masshtablanadigan va zamonaviy veb-ilovalarni yarataman.",
+    "fullstack": "Full-stack ishlanmalar",
+    "startProject": "Loyihani boshlash",
+    "viewWork": "Ishlarni ko'rish"
+  },
+  "trust": {
+    "openSource": "Ochiq kod",
+    "cicd": "CI/CD tayyor",
+    "performance": "Samaradorlik",
+    "projectsDelivered": "Loyihalar topshirildi",
+    "responseTime": "Javob vaqti",
+    "uptime": "Uptime tamoyili"
+  },
+  "services": {
+    "label": "Xizmatlar",
+    "title": "Ishga tushirish uchun kerak hamma narsa",
+    "description": "G'oyadan ishlab chiqarishgacha — samaradorlik, UX va masshtablanishga qaratilgan full-stack ishlanma.",
+    "webApps": "Veb-ilovalar",
+    "webAppsDesc": "Zamonaviy arxitektura, real-time xususiyatlar va piksel-mukammal UI bilan to'liq ilovalar.",
+    "saas": "SaaS platformalar",
+    "saasDesc": "Avtorizatsiya, billing, dashboardlar va masshtablanadigan infratuzilmali multi-tenant tizimlar.",
+    "landingPages": "Landing sahifalar",
+    "landingPagesDesc": "Tezlik va SEO uchun optimallashtirilgan premium dizayndagi yuqori konversion sahifalar.",
+    "dashboards": "Admin panellar",
+    "dashboardsDesc": "Diagrammalar, jadvallar, filtrlar va rolga asoslangan kirish huquqiga ega interfeyslar.",
+    "api": "API ishlanma",
+    "apiDesc": "Hujjatlar, validatsiya va monitoring bilan RESTful va async API."
+  },
+  "projects": {
+    "label": "Tanlangan ishlar",
+    "title": "Keyslar",
+    "description": "Haqiqiy muammolar, muhandislik yechimlari, o'lchanadigan natijalar.",
+    "problem": "Muammo",
+    "solution": "Yechim",
+    "result": "Natija",
+    "analytics": "Analitika dashboardi",
+    "analyticsProblem": "Mijozga eski vositalarsiz real vaqtdagi biznes ko'rsatkichlari kerak edi.",
+    "analyticsSolution": "WebSocket yangilanishlari va maxsus diagrammalar bilan React dashboard yaratdim.",
+    "analyticsResult": "Qaror qabul qilish 40% tezlashdi, kunlik faollik 3 barobar oshdi.",
+    "booking": "SaaS bronlash platformasi",
+    "bookingProblem": "Qo'lda rejalashtirish ikki marta bronlash va daromad yo'qotilishiga olib keldi.",
+    "bookingSolution": "To'lovlar va bildirishnomalar bilan multi-tenant bronlash tizimini ishlab chiqdim.",
+    "bookingResult": "Ikki marta bronlash yo'q, ma'muriy vaqt 60% qisqardi.",
+    "ecommerce": "E-commerce API",
+    "ecommerceProblem": "Monolit backend yuqori yuklama vaqtida masshtablana olmadi.",
+    "ecommerceSolution": "Keshlash va navbat ishchilari bilan asinxron FastAPI mikrosxizmatini loyihalashtirdim.",
+    "ecommerceResult": "O'tkazish qobiliyati 10 barobar oshdi, savdo vaqtida 99.9% uptime."
+  },
+  "techStack": {
+    "label": "Texnologiyalar",
+    "title": "Zamonaviy vositalar bilan yaratilgan",
+    "description": "Ishlab chiqarish ilovalari uchun sinovdan o'tgan stack.",
+    "react": "Komponentli UI",
+    "typescript": "Xavfsiz ishlanma",
+    "tailwind": "Utility-first stillash",
+    "fastapi": "Yuqori samaradorlikdagi API",
+    "postgresql": "Ishonchli ma'lumotlar qatlami"
+  },
+  "about": {
+    "label": "Falsafa",
+    "title": "Maqsadli muhandislik",
+    "description": "Har bir kod qatori maqsadga xizmat qiladi. Har bir interfeys o'z o'rnini oqlaydi.",
+    "speed": "Tezlik",
+    "speedText": "Sifatni yo'qotmasdan tez yetkazish. Iterativ yetkazish, doimiy yaxshilash.",
+    "quality": "Sifat",
+    "qualityText": "Toza kod, puxta testlash va masshtablanadigan arxitektura.",
+    "scalability": "Masshtablanish",
+    "scalabilityText": "MVP dan millionlab foydalanuvchilargacha qayta yozmasdan o'sishga mo'ljallangan.",
+    "ux": "UX fokus",
+    "uxText": "Har bir o'zaro ta'sir aniqlik, tezlik va konversiya uchun yaratilgan."
+  },
+  "contact": {
+    "getInTouch": "Aloqa",
+    "title": "Keling birgalikda ajoyib narsa yarataylik",
+    "description": "Loyihangiz haqida gapirib bering. Men 2 soat ichida aniq reja va muddatlar bilan javob beraman.",
+    "freeConsultation": "Bepul dastlabki maslahat",
+    "fixedPrice": "Qat'iy narx yoki soatlik",
+    "nda": "NDA mavjud",
+    "name": "Ismingiz",
+    "namePlaceholder": "Sizning ismingiz",
+    "telegram": "Telegram",
+    "telegramPlaceholder": "@username",
+    "projectDescription": "Loyiha tavsifi",
+    "projectPlaceholder": "Loyihangiz, muddatlaringiz va byudjetingiz haqida gapirib bering...",
+    "getQuote": "Taklif olish",
+    "sending": "Yuborilmoqda...",
+    "successTitle": "Xabar yuborildi!",
+    "successText": "Men tez orada siz bilan bog'lanaman.",
+    "invalidSubmission": "Noto'g'ri yuborish",
+    "invalidTelegram": "Noto'g'ri Telegram username",
+    "descTooShort": "Tavsif juda qisqa",
+    "errorMsg": "Nimadir noto'g'ri ketdi"
+  },
+  "footer": {
+    "allRights": "Barcha huquqlar himoyalangan."
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Tez-tez beriladigan savollar",
+    "description": "Hamkorlik haqida tez-tez beriladigan savollarga tezkor javoblar.",
+    "q1": "Qanday texnologiyalar bilan ishlaysiz?",
+    "a1": "Zamonaviy full-stack ishlanmalarga ixtisoslashganman: React, TypeScript, Python (FastAPI). Ma'lumotlar uchun PostgreSQL, stillash uchun Tailwind CSS va Docker bilan zamonaviy DevOps amaliyotlaridan foydalanaman.",
+    "q2": "Odatdagi loyiha qancha vaqt oladi?",
+    "a2": "Muddatlar hajmga bog'liq. Landing sahifa — 1-2 hafta, veb-ilova — 3-6 hafta, to'liq SaaS platforma — 6-12 hafta. Aniq muddatlarni maslahatlashuvdan keyin beraman.",
+    "q3": "Ishga tushgandan keyin qo'llab-quvvatlaysizmi?",
+    "a3": "Ha. Har bir loyiha ishga tushirilgandan keyin 30 kunlik qo'llab-quvvatlashni o'z ichiga oladi: xatolarni tuzatish va kichik o'zgarishlar. Kengaytirilgan xizmat va yangi funksiyalar alohida shartnoma bo'yicha.",
+    "q4": "Siz bilan ishlashni qanday boshlash mumkin?",
+    "a4": "Xabar yozish bilan boshlang. Aloqa formasi yoki Telegram orqali yozing, loyihangiz haqida gapirib bering, men 2 soat ichida aniq reja, muddatlar va narx bilan javob beraman. Majburiyatsiz.",
+    "q5": "Narx modelingiz qanday?",
+    "a5": "Ruxsat etilgan narxni ham, soatlik to'lovni ham taklif qilaman. Ruxsat etilgan narx aniq talablarga ega loyihalar uchun mos. Soatlik — joriy ish, qo'llab-quvvatlash yoki rivojlanayotgan loyihalar uchun. Birinchi maslahat bepul."
+  },
+  "language": {
+    "en": "English",
+    "ru": "Русский",
+    "kk": "Қазақша",
+    "uz": "O'zbekcha"
+  }
+}

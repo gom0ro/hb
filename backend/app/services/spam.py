@@ -1,0 +1,23 @@
+import re
+
+TELEGRAM_PATTERN = re.compile(r"^@?[a-zA-Z0-9_]{5,32}$")
+SUSPICIOUS_PATTERNS = re.compile(
+    r"(https?://|viagra|casino|crypto pump|<script)", re.IGNORECASE
+)
+
+
+def is_spam(name: str, contact: str, description: str, honeypot: str) -> str | None:
+    if honeypot:
+        return "Invalid submission"
+
+    if not TELEGRAM_PATTERN.match(contact.strip()):
+        return "Invalid Telegram username"
+
+    for field in (name, description):
+        if SUSPICIOUS_PATTERNS.search(field):
+            return "Invalid submission"
+
+    if len(description.strip()) < 10:
+        return "Description too short"
+
+    return None
