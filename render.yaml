@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: ithub-api
+    runtime: python
+    repo: https://github.com/gom0ro/hb
+    plan: free
+    region: ohio
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ithub-db
+          property: connectionString
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://hb.vercel.app
+      - key: ADMIN_TOKEN
+        sync: false
+
+databases:
+  - name: ithub-db
+    plan: free
+    region: ohio
+    databaseName: ithub
+    ipAllowList: []

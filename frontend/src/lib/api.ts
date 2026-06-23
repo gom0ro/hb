@@ -11,8 +11,10 @@ export interface LeadResponse {
   message: string
 }
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
 export async function submitLead(data: LeadPayload): Promise<LeadResponse> {
-  const response = await fetch('/api/leads', {
+  const response = await fetch(`${API_BASE}/api/leads`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
