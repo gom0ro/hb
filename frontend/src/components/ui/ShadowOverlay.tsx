@@ -1,4 +1,4 @@
-import { useRef, useId, useEffect, useState, type CSSProperties } from 'react';
+import { useRef, useId, useEffect, useState, useMemo, type CSSProperties } from 'react';
 import { animate, useMotionValue, type AnimationPlaybackControls } from 'framer-motion';
 
 interface ResponsiveImage {
@@ -75,7 +75,14 @@ export function ShadowOverlay({
         return () => mq.removeEventListener('change', handler)
     }, [])
 
-    const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
+    const isMobile = useMemo(() => {
+        if (typeof window === 'undefined') return false
+        return window.innerWidth < 768 || 'ontouchstart' in window
+    }, [])
+
+    const displacementScale = animation && !reducedMotion
+        ? mapRange(animation.scale, 1, 100, isMobile ? 8 : 20, isMobile ? 40 : 100)
+        : 0;
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
 
     useEffect(() => {

@@ -47,7 +47,7 @@ export function LanguageSwitcher() {
         <motion.div
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute right-0 top-full mt-2 min-w-[130px] rounded-xl border border-white/[0.08] bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
+          className="absolute right-0 sm:right-0 left-0 sm:left-auto top-full mt-2 min-w-[130px] rounded-xl border border-white/[0.08] bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden z-50"
         >
           {languages.map((lang) => (
             <button

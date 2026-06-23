@@ -21,4 +21,10 @@ i18n.use(initReactI18next).init({
   },
 })
 
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng
+})
+
+document.documentElement.lang = savedLanguage
+
 export default i18n

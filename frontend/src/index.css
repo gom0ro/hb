@@ -364,3 +364,26 @@ section {
 section:first-child {
   content-visibility: visible;
 }
+
+/* ====== Accessibility: Focus-visible ====== */
+*:focus-visible {
+  outline: none;
+  ring: 2px solid var(--color-accent);
+  ring-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@supports not selector(*:focus-visible) {
+  *:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}

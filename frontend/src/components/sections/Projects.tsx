@@ -37,6 +37,12 @@ export function Projects() {
                 <div
                   className={`relative h-48 bg-gradient-to-br ${project.gradient} border-b border-white/[0.06] transition-transform duration-700 group-hover:scale-110`}
                 >
+                  <div className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                      backgroundImage: `linear-gradient(45deg, currentColor 1px, transparent 1px), linear-gradient(-45deg, currentColor 1px, transparent 1px)`,
+                      backgroundSize: '20px 20px',
+                    }}
+                  />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     <motion.div
                       initial={{ scale: 0.5, opacity: 0 }}
@@ -60,7 +66,14 @@ export function Projects() {
                       </div>
                     </div>
                   </div>
-                  
+                  <div className="absolute bottom-3 right-3 flex gap-1.5">
+                    <div className={`h-6 w-6 rounded-md border border-white/[0.12] bg-white/5 flex items-center justify-center text-[10px] text-white/40`}>
+                      {project.stack[0].charAt(0)}
+                    </div>
+                    <div className={`h-6 w-6 rounded-md border border-white/[0.12] bg-white/5 flex items-center justify-center text-[10px] text-white/40`}>
+                      {project.stack[1].charAt(0)}
+                    </div>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
 
