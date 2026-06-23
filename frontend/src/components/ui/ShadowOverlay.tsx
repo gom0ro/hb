@@ -77,16 +77,18 @@ export function ShadowOverlay({
 
     const isMobile = useMemo(() => {
         if (typeof window === 'undefined') return false
-        return window.innerWidth < 768 || 'ontouchstart' in window
+        return window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0
     }, [])
 
-    const displacementScale = animation && !reducedMotion
-        ? mapRange(animation.scale, 1, 100, isMobile ? 8 : 20, isMobile ? 40 : 100)
+    const disableEffects = reducedMotion || isMobile
+
+    const displacementScale = animation && !disableEffects
+        ? mapRange(animation.scale, 1, 100, 20, 100)
         : 0;
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
 
     useEffect(() => {
-        if (!feColorMatrixRef.current || !animationEnabled || reducedMotion) return
+        if (!feColorMatrixRef.current || !animationEnabled || disableEffects) return
 
         if (hueRotateAnimation.current) {
             hueRotateAnimation.current.stop();
@@ -111,7 +113,7 @@ export function ShadowOverlay({
                 hueRotateAnimation.current.stop();
             }
         };
-    }, [animationEnabled, animationDuration, hueRotateMotionValue, reducedMotion]);
+    }, [animationEnabled, animationDuration, hueRotateMotionValue, disableEffects]);
 
     return (
         <div
@@ -132,7 +134,7 @@ export function ShadowOverlay({
                     filter: animationEnabled ? `url(#${id}) blur(4px)` : "none"
                 }}
             >
-                {animationEnabled && (
+                {animationEnabled && !disableEffects && (
                     <svg style={{ position: "absolute", width: 0, height: 0 }}>
                         <defs>
                             <filter id={id}>

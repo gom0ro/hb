@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from 'react'
 import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { Hero } from './components/sections/Hero'
@@ -10,16 +11,32 @@ import { About } from './components/sections/About'
 import { FAQ } from './components/sections/FAQ'
 import { ContactForm } from './components/sections/ContactForm'
 import { ShadowOverlay } from './components/ui/ShadowOverlay'
+import { StaticBackground } from './components/ui/StaticBackground'
+
+function getIsMobile() {
+  return typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0)
+}
+
+function subscribeIsMobile(cb: () => void) {
+  window.addEventListener('resize', cb)
+  return () => window.removeEventListener('resize', cb)
+}
 
 function App() {
+  const isMobile = useSyncExternalStore(subscribeIsMobile, getIsMobile, () => false)
+
   return (
     <>
-      <ShadowOverlay
-        animation={{ scale: 30, speed: 50 }}
-        noise={{ opacity: 0.15, scale: 1 }}
-        color="rgba(0, 112, 243, 0.3)"
-        sizing="fill"
-      />
+      {isMobile ? (
+        <StaticBackground />
+      ) : (
+        <ShadowOverlay
+          animation={{ scale: 30, speed: 50 }}
+          noise={{ opacity: 0.15, scale: 1 }}
+          color="rgba(0, 112, 243, 0.3)"
+          sizing="fill"
+        />
+      )}
       <Navbar />
       <main>
         <Hero />

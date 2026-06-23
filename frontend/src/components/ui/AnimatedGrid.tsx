@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+function checkMobile() {
+  return typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0)
+}
 
 export function AnimatedGrid() {
   const gridRef = useRef<HTMLDivElement>(null)
-  const isTouchRef = useRef(false)
+  const [isMobile] = useState(checkMobile)
 
   useEffect(() => {
-    isTouchRef.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-  }, [])
-
-  useEffect(() => {
+    if (isMobile) return
     const grid = gridRef.current
     if (!grid) return
 
@@ -21,10 +22,10 @@ export function AnimatedGrid() {
 
     observer.observe(grid)
     return () => observer.disconnect()
-  }, [])
+  }, [isMobile])
 
   useEffect(() => {
-    if (isTouchRef.current) return
+    if (isMobile) return
     const grid = gridRef.current
     if (!grid) return
 
@@ -41,7 +42,9 @@ export function AnimatedGrid() {
 
     grid.addEventListener('mousemove', handleMouseMove)
     return () => grid.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  }, [isMobile])
+
+  if (isMobile) return null
 
   return (
     <div
