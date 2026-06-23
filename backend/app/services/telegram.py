@@ -25,4 +25,6 @@ async def send_telegram_notification(name: str, contact: str, description: str) 
                 "parse_mode": "HTML",
             },
         )
+        if response.status_code != 200:
+            print(f"Telegram API error: {response.status_code} {response.text}")
         return response.status_code == 200
