@@ -4,12 +4,12 @@
     "work": "Work",
     "faq": "FAQ",
     "stack": "Stack",
-    "about": "About",
+    "about": "About us",
     "startProject": "Start a project"
   },
   "hero": {
-    "available": "Available for new projects",
-    "headline": "I build fast, scalable and modern web applications.",
+    "available": "Open for new projects",
+    "headline": "We build fast, scalable and modern web applications.",
     "fullstack": "Full-stack development with",
     "startProject": "Start a project",
     "viewWork": "View work"
@@ -83,7 +83,7 @@
   "contact": {
     "getInTouch": "Get in touch",
     "title": "Let's build something great",
-    "description": "Tell me about your project. I'll respond within 2 hours with a clear plan and timeline.",
+    "description": "Tell us about your project. We'll respond within 2 hours with a clear plan and timeline.",
     "freeConsultation": "Free initial consultation",
     "fixedPrice": "Fixed-price or hourly",
     "nda": "NDA available",
@@ -92,11 +92,11 @@
     "telegram": "Telegram",
     "telegramPlaceholder": "@username",
     "projectDescription": "Project description",
-    "projectPlaceholder": "Tell me about your project, timeline, and budget...",
+    "projectPlaceholder": "Tell us about your project, timeline, and budget...",
     "getQuote": "Get a quote",
     "sending": "Sending...",
     "successTitle": "Message sent!",
-    "successText": "I'll get back to you shortly.",
+    "successText": "We'll get back to you shortly.",
     "invalidSubmission": "Invalid submission",
     "invalidTelegram": "Invalid Telegram username",
     "descTooShort": "Description too short",
@@ -110,15 +110,15 @@
     "title": "Frequently asked questions",
     "description": "Quick answers to common questions about working together.",
     "q1": "What technologies do you work with?",
-    "a1": "I specialize in modern full-stack development with React, TypeScript, and Python (FastAPI). My stack includes PostgreSQL for data, Tailwind CSS for styling, and modern DevOps practices with Docker. I choose tools based on project needs.",
+    "a1": "We specialize in modern full-stack development with React, TypeScript, and Python (FastAPI). Our stack includes PostgreSQL for data, Tailwind CSS for styling, and modern DevOps practices with Docker. We choose tools based on project needs.",
     "q2": "How long does a typical project take?",
-    "a2": "Timelines depend on scope. A landing page takes 1-2 weeks, a web application 3-6 weeks, and a full SaaS platform 6-12 weeks. I'll provide a detailed timeline after our initial consultation.",
+    "a2": "Timelines depend on scope. A landing page takes 1-2 weeks, a web application 3-6 weeks, and a full SaaS platform 6-12 weeks. We'll provide a detailed timeline after our initial consultation.",
     "q3": "Do you provide support after launch?",
     "a3": "Yes. Every project includes 30 days of post-launch support for bug fixes and minor adjustments. Extended maintenance and feature updates are available through a separate agreement.",
     "q4": "How do we start working together?",
-    "a4": "It starts with a conversation. Reach out via the contact form or Telegram, tell me about your project, and I'll respond within 2 hours with a clear plan, timeline, and quote. No commitment needed.",
+    "a4": "It starts with a conversation. Reach out via the contact form or Telegram, tell us about your project, and we'll respond within 2 hours with a clear plan, timeline, and quote. No commitment needed.",
     "q5": "What is your pricing model?",
-    "a5": "I offer both fixed-price and hourly rates. Fixed-price works best for well-defined projects with clear requirements. Hourly is better for ongoing work, maintenance, or evolving projects. Free initial consultation included."
+    "a5": "We offer both fixed-price and hourly rates. Fixed-price works best for well-defined projects with clear requirements. Hourly is better for ongoing work, maintenance, or evolving projects. Free initial consultation included."
   },
   "language": {
     "en": "English",

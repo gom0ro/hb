@@ -44,7 +44,7 @@ export function Navbar() {
             <div className="flex h-7 w-7 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] transition-colors duration-300 group-hover:border-[var(--color-border-hover)]">
               <div className="h-2.5 w-2.5 rotate-45 bg-[var(--color-foreground)] transition-transform duration-500 group-hover:rotate-180" />
             </div>
-            <span className="text-sm font-semibold tracking-tight text-[var(--color-foreground)]">devstudio</span>
+            <span className="text-sm font-semibold tracking-tight text-[var(--color-foreground)]">ItHub</span>
           </a>
 
           <div className="hidden items-center gap-8 md:flex">

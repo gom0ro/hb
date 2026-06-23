@@ -4,12 +4,12 @@
     "work": "Ishlar",
     "faq": "FAQ",
     "stack": "Stack",
-    "about": "Men haqimda",
+    "about": "Biz haqimizda",
     "startProject": "Loyihani boshlash"
   },
   "hero": {
     "available": "Yangi loyihalar uchun ochiq",
-    "headline": "Tez, masshtablanadigan va zamonaviy veb-ilovalarni yarataman.",
+    "headline": "Tez, masshtablanadigan va zamonaviy veb-ilovalarni yaratamiz.",
     "fullstack": "Full-stack ishlanmalar",
     "startProject": "Loyihani boshlash",
     "viewWork": "Ishlarni ko'rish"
@@ -83,7 +83,7 @@
   "contact": {
     "getInTouch": "Aloqa",
     "title": "Keling birgalikda ajoyib narsa yarataylik",
-    "description": "Loyihangiz haqida gapirib bering. Men 2 soat ichida aniq reja va muddatlar bilan javob beraman.",
+    "description": "Loyihangiz haqida gapirib bering. Biz 2 soat ichida aniq reja va muddatlar bilan javob beramiz.",
     "freeConsultation": "Bepul dastlabki maslahat",
     "fixedPrice": "Qat'iy narx yoki soatlik",
     "nda": "NDA mavjud",
@@ -96,7 +96,7 @@
     "getQuote": "Taklif olish",
     "sending": "Yuborilmoqda...",
     "successTitle": "Xabar yuborildi!",
-    "successText": "Men tez orada siz bilan bog'lanaman.",
+    "successText": "Biz tez orada siz bilan bog'lanamiz.",
     "invalidSubmission": "Noto'g'ri yuborish",
     "invalidTelegram": "Noto'g'ri Telegram username",
     "descTooShort": "Tavsif juda qisqa",
@@ -110,15 +110,15 @@
     "title": "Tez-tez beriladigan savollar",
     "description": "Hamkorlik haqida tez-tez beriladigan savollarga tezkor javoblar.",
     "q1": "Qanday texnologiyalar bilan ishlaysiz?",
-    "a1": "Zamonaviy full-stack ishlanmalarga ixtisoslashganman: React, TypeScript, Python (FastAPI). Ma'lumotlar uchun PostgreSQL, stillash uchun Tailwind CSS va Docker bilan zamonaviy DevOps amaliyotlaridan foydalanaman.",
+    "a1": "Zamonaviy full-stack ishlanmalarga ixtisoslashganmiz: React, TypeScript, Python (FastAPI). Ma'lumotlar uchun PostgreSQL, stillash uchun Tailwind CSS va Docker bilan zamonaviy DevOps amaliyotlaridan foydalanamiz.",
     "q2": "Odatdagi loyiha qancha vaqt oladi?",
-    "a2": "Muddatlar hajmga bog'liq. Landing sahifa — 1-2 hafta, veb-ilova — 3-6 hafta, to'liq SaaS platforma — 6-12 hafta. Aniq muddatlarni maslahatlashuvdan keyin beraman.",
+    "a2": "Muddatlar hajmga bog'liq. Landing sahifa — 1-2 hafta, veb-ilova — 3-6 hafta, to'liq SaaS platforma — 6-12 hafta. Aniq muddatlarni maslahatlashuvdan keyin beramiz.",
     "q3": "Ishga tushgandan keyin qo'llab-quvvatlaysizmi?",
     "a3": "Ha. Har bir loyiha ishga tushirilgandan keyin 30 kunlik qo'llab-quvvatlashni o'z ichiga oladi: xatolarni tuzatish va kichik o'zgarishlar. Kengaytirilgan xizmat va yangi funksiyalar alohida shartnoma bo'yicha.",
     "q4": "Siz bilan ishlashni qanday boshlash mumkin?",
-    "a4": "Xabar yozish bilan boshlang. Aloqa formasi yoki Telegram orqali yozing, loyihangiz haqida gapirib bering, men 2 soat ichida aniq reja, muddatlar va narx bilan javob beraman. Majburiyatsiz.",
+    "a4": "Xabar yozish bilan boshlang. Aloqa formasi yoki Telegram orqali yozing, loyihangiz haqida gapirib bering, biz 2 soat ichida aniq reja, muddatlar va narx bilan javob beramiz. Majburiyatsiz.",
     "q5": "Narx modelingiz qanday?",
-    "a5": "Ruxsat etilgan narxni ham, soatlik to'lovni ham taklif qilaman. Ruxsat etilgan narx aniq talablarga ega loyihalar uchun mos. Soatlik — joriy ish, qo'llab-quvvatlash yoki rivojlanayotgan loyihalar uchun. Birinchi maslahat bepul."
+    "a5": "Ruxsat etilgan narxni ham, soatlik to'lovni ham taklif qilamiz. Ruxsat etilgan narx aniq talablarga ega loyihalar uchun mos. Soatlik — joriy ish, qo'llab-quvvatlash yoki rivojlanayotgan loyihalar uchun. Birinchi maslahat bepul."
   },
   "language": {
     "en": "English",
