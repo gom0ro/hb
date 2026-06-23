@@ -11,7 +11,7 @@ from app.models import Lead
 from app.routers import leads
 from app.schemas import LeadAdmin
 
-app = FastAPI(title="Dev Studio API", version="1.0.0")
+app = FastAPI(title="ItHub API", version="1.0.0")
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
