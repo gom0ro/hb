@@ -11,7 +11,7 @@ export interface LeadResponse {
   message: string
 }
 
-const API_BASE = import.meta.env.VITE_API_URL || ''
+const API_BASE = import.meta.env.VITE_API_URL || 'https://ithub-api-lwms.onrender.com'
 
 export async function submitLead(data: LeadPayload): Promise<LeadResponse> {
   const response = await fetch(`${API_BASE}/api/leads`, {
