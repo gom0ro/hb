@@ -17,7 +17,7 @@ services:
       - key: TELEGRAM_CHAT_ID
         sync: false
       - key: CORS_ORIGINS
-        value: https://hb.vercel.app
+        value: https://hb.vercel.app,https://hb-cyan.vercel.app
       - key: ADMIN_TOKEN
         sync: false
 
