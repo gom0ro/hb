@@ -14,6 +14,7 @@ import { StaticBackground } from './components/ui/StaticBackground'
 import { ErrorBoundary } from './components/ui/ErrorBoundary'
 import { SEO } from './components/ui/SEO'
 import { Analytics } from './components/ui/Analytics'
+import { ScrollToTop } from './components/ui/ScrollToTop'
 
 function getIsMobile() {
   return typeof window !== 'undefined' && (window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0)
@@ -53,6 +54,7 @@ function App() {
         <ContactForm />
       </main>
       <Footer />
+      <ScrollToTop />
     </ErrorBoundary>
   )
 }

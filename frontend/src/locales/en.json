@@ -45,6 +45,7 @@
     "problem": "Problem",
     "solution": "Solution",
     "result": "Result",
+    "viewCase": "View case",
     "analytics": "Analytics Dashboard",
     "analyticsProblem": "Client needed real-time business metrics without slow legacy tools.",
     "analyticsSolution": "Built a React dashboard with live WebSocket updates and custom charts.",
@@ -127,6 +128,9 @@
     "whatsappMessage": "Hi! My name is {{name}}.\nMy phone: {{contact}}\nProject:\n{{description}}"
   },
   "footer": {
+    "tagline": "Full-stack development team building fast, scalable and modern web applications.",
+    "navigation": "Navigation",
+    "contacts": "Contacts",
     "allRights": "All rights reserved."
   },
   "faq": {

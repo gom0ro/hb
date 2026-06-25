@@ -41,11 +41,15 @@ export function Projects() {
                   />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     <motion.div
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      whileHover={{ scale: 1, opacity: 1 }}
-                      transition={{ type: "spring", damping: 15 }}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      whileHover={{ scale: 1.05 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     >
-                      <ArrowUpRight className="h-12 w-12 text-white/90" />
+                      <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2.5 text-sm font-medium text-white shadow-lg">
+                        {t('projects.viewCase')}
+                        <ArrowUpRight className="h-4 w-4" />
+                      </span>
                     </motion.div>
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center opacity-60">

@@ -45,6 +45,7 @@
     "problem": "Muammo",
     "solution": "Yechim",
     "result": "Natija",
+    "viewCase": "Keysni ko'rish",
     "analytics": "Analitika dashboardi",
     "analyticsProblem": "Mijozga eski vositalarsiz real vaqtdagi biznes ko'rsatkichlari kerak edi.",
     "analyticsSolution": "WebSocket yangilanishlari va maxsus diagrammalar bilan React dashboard yaratdim.",
@@ -127,6 +128,9 @@
     "whatsappMessage": "Salom! Mening ismim {{name}}.\nTelefonim: {{contact}}\nLoyiha:\n{{description}}"
   },
   "footer": {
+    "tagline": "Tez, masshtablanadigan va zamonaviy veb-ilovalarni yaratuvchi full-stack ishlab chiqish jamoasi.",
+    "navigation": "Navigatsiya",
+    "contacts": "Aloqa",
     "allRights": "Barcha huquqlar himoyalangan."
   },
   "faq": {

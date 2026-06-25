@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, Loader2, Mail } from 'lucide-react'
-import { SiTelegram, SiWhatsapp } from 'react-icons/si'
+import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { SiTelegram, SiWhatsapp, SiGmail } from 'react-icons/si'
 import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { submitLead } from '../../lib/api'
@@ -364,7 +364,7 @@ export function ContactForm() {
                             : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
                         }`}
                       >
-                        <Mail className="h-3.5 w-3.5" />
+                        <SiGmail className="h-3.5 w-3.5" />
                         Email
                       </button>
                     </div>
