@@ -7,6 +7,7 @@ from app.models import Lead
 from app.schemas import LeadCreate, LeadResponse
 from app.services.spam import is_spam
 from app.services.telegram import send_telegram_notification
+from app.services.email import send_email_notification
 
 router = APIRouter(prefix="/api/leads", tags=["leads"])
 
@@ -44,5 +45,6 @@ async def create_lead(
     db.refresh(lead)
 
     await send_telegram_notification(lead.name, lead.contact, lead.description)
+    await send_email_notification(lead.name, lead.contact, lead.description)
 
     return LeadResponse(id=lead.id, message="Thank you! We'll be in touch soon.")
