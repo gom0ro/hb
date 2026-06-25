@@ -24,6 +24,7 @@ export function Navbar() {
     { label: t('nav.faq'), href: '#faq' },
     { label: t('nav.stack'), href: '#stack' },
     { label: t('nav.about'), href: '#about' },
+    { label: t('nav.aboutRequest'), href: '#contact' },
   ]
 
   const itemVariants = {

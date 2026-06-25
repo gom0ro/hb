@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, Loader2, MessageCircle, Phone } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Loader2, Mail } from 'lucide-react'
+import { SiTelegram, SiWhatsapp } from 'react-icons/si'
 import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { submitLead } from '../../lib/api'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
+import { SectionHeader } from '../ui/SectionHeader'
 
-type ContactMethod = 'telegram' | 'whatsapp'
+type ContactMethod = 'telegram' | 'whatsapp' | 'email'
 
 type FieldErrors = {
   name?: string
@@ -27,6 +29,12 @@ function validatePhone(value: string): string | undefined {
   if (!value) return undefined
   const digits = value.replace(/[\s\-\(\)]/g, '')
   if (!/^\+?\d{7,15}$/.test(digits)) return 'Enter a valid phone number'
+  return undefined
+}
+
+function validateEmail(value: string): string | undefined {
+  if (!value) return undefined
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'Enter a valid email'
   return undefined
 }
 
@@ -73,7 +81,7 @@ export function ContactForm() {
     if (e) errors.name = e
   }
   if ((touched.contact || submitAttempted) && contact !== undefined) {
-    const fn = method === 'whatsapp' ? validatePhone : validateTelegram
+    const fn = method === 'whatsapp' ? validatePhone : method === 'email' ? validateEmail : validateTelegram
     const e = fn(contact)
     if (e) errors.contact = e
   }
@@ -97,7 +105,7 @@ export function ContactForm() {
     setSubmitAttempted(true)
     setTouched({ name: true, contact: true, description: true })
 
-    const contactFn = method === 'whatsapp' ? validatePhone : validateTelegram
+    const contactFn = method === 'whatsapp' ? validatePhone : method === 'email' ? validateEmail : validateTelegram
     const hasErrors =
       validateName(name) ||
       contactFn(contact) ||
@@ -164,6 +172,14 @@ export function ContactForm() {
   return (
     <section id="contact" className="py-32">
       <div ref={sectionRef} className="mx-auto max-w-6xl px-6">
+        <RevealOnScroll>
+          <SectionHeader
+            label={t('contact.label')}
+            title={t('contact.title2')}
+            description={t('contact.description2')}
+          />
+        </RevealOnScroll>
+
         <RevealOnScroll>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -282,6 +298,7 @@ export function ContactForm() {
                   </div>
 
                   <div>
+                    <p className="text-sm font-semibold text-[var(--color-foreground)] mb-3">{t('contact.contactUs')}</p>
                     <label className="block text-xs font-medium text-[var(--color-muted)] mb-2">
                       {t('contact.contactVia') || 'Contact via'}
                     </label>
@@ -295,7 +312,7 @@ export function ContactForm() {
                             : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
                         }`}
                       >
-                        <MessageCircle className="h-3.5 w-3.5" />
+                        <SiTelegram className="h-3.5 w-3.5" />
                         Telegram
                       </button>
                       <button
@@ -307,21 +324,33 @@ export function ContactForm() {
                             : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
                         }`}
                       >
-                        <Phone className="h-3.5 w-3.5" />
+                        <SiWhatsapp className="h-3.5 w-3.5" />
                         WhatsApp
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => switchMethod('email')}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition-all ${
+                          method === 'email'
+                            ? 'bg-blue-500/20 text-blue-400 ring-1 ring-blue-500/40'
+                            : 'bg-[var(--color-surface)] text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
+                        }`}
+                      >
+                        <Mail className="h-3.5 w-3.5" />
+                        Email
                       </button>
                     </div>
                     <label htmlFor="contact" className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors">
-                      {method === 'whatsapp' ? (t('contact.phone') || 'Phone') : t('contact.telegram')}
+                      {method === 'whatsapp' ? (t('contact.phone') || 'Phone') : method === 'email' ? (t('contact.email') || 'Email') : t('contact.telegram')}
                     </label>
                     <input
                       id="contact"
-                      type="text"
+                      type={method === 'email' ? 'email' : 'text'}
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
                       onBlur={() => handleBlur('contact')}
                       className={inputClass(errors.contact)}
-                      placeholder={method === 'whatsapp' ? '+1234567890' : t('contact.telegramPlaceholder')}
+                      placeholder={method === 'whatsapp' ? '+1234567890' : method === 'email' ? 'you@example.com' : t('contact.telegramPlaceholder')}
                     />
                     {errors.contact && (
                       <motion.p
@@ -335,6 +364,7 @@ export function ContactForm() {
                   </div>
 
                   <div>
+                    <p className="text-sm font-semibold text-[var(--color-foreground)] mb-3">{t('contact.aboutRequest')}</p>
                     <label
                       htmlFor="description"
                       className="block text-xs font-medium text-[var(--color-muted)] mb-2 transition-colors"

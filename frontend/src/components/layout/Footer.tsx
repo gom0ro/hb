@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
-import { Code2, Mail, Send } from 'lucide-react'
+import { Mail } from 'lucide-react'
+import { SiGithub, SiTelegram } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
 
 export function Footer() {
   const { t } = useTranslation()
 
   const links = [
-    { icon: Code2, label: 'GitHub', href: 'https://github.com' },
-    { icon: Send, label: 'Telegram', href: 'https://t.me' },
+    { icon: SiGithub, label: 'GitHub', href: 'https://github.com' },
+    { icon: SiTelegram, label: 'Telegram', href: 'https://t.me' },
     { icon: Mail, label: 'Email', href: 'mailto:hello@ithub.dev' },
   ]
   return (

@@ -56,9 +56,16 @@ export const projects = [
 export const techStack = [
   { name: 'React', description: 'Component-driven UI' },
   { name: 'TypeScript', description: 'Type-safe development' },
-  { name: 'Tailwind CSS', description: 'Utility-first styling' },
+  { name: 'C', description: 'Systems programming language' },
   { name: 'FastAPI', description: 'High-performance APIs' },
   { name: 'PostgreSQL', description: 'Reliable data layer' },
+  { name: 'Python', description: 'Versatile programming language' },
+  { name: 'Next.js', description: 'React framework for production' },
+  { name: 'Docker', description: 'Containerized deployments' },
+  { name: 'Redis', description: 'In-memory caching & pub/sub' },
+  { name: 'Django', description: 'High-level Python framework' },
+  { name: 'Node.js', description: 'JavaScript runtime environment' },
+  { name: 'Vue', description: 'Progressive UI framework' },
 ]
 
 export const metrics = [
