@@ -7,6 +7,9 @@ SUSPICIOUS_PATTERNS = re.compile(
 )
 
 
+EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+
+
 def is_spam(
     name: str,
     contact: str,
@@ -20,6 +23,9 @@ def is_spam(
     if contact_method == "whatsapp":
         if not PHONE_PATTERN.match(contact.strip()):
             return "Invalid phone number"
+    elif contact_method == "email":
+        if not EMAIL_PATTERN.match(contact.strip()):
+            return "Invalid email"
     elif not TELEGRAM_PATTERN.match(contact.strip()):
         return "Invalid Telegram username"
 
