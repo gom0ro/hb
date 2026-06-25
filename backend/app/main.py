@@ -26,6 +26,7 @@ if "contact_method" not in [c["name"] for c in inspector.get_columns("leads")]:
         conn.commit()
 
 origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
+origins.extend(["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"])
 
 app.add_middleware(
     CORSMiddleware,
