@@ -132,6 +132,34 @@ export function ContactForm() {
       return
     }
 
+    if (method === 'email') {
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/gomoroza4@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email: contact,
+            description,
+            _subject: `New lead from ${name}`,
+          }),
+        })
+        const data = await res.json()
+        if (data.success === 'false') throw new Error(data.message)
+      } catch (err) {
+        setStatus('error')
+        setErrorMsg('Failed to send email')
+        return
+      }
+      setStatus('success')
+      setName('')
+      setContact('')
+      setDescription('')
+      setTouched({})
+      setSubmitAttempted(false)
+      return
+    }
+
     setStatus('loading')
     setErrorMsg('')
 
