@@ -8,10 +8,10 @@ async def send_telegram_notification(name: str, contact: str, description: str) 
         return False
 
     text = (
-        f"<b>New Lead</b>\n\n"
-        f"<b>Name:</b> {name}\n"
-        f"<b>Contact:</b> {contact}\n"
-        f"<b>Project:</b>\n{description}"
+        f"<b>Новая заявка</b>\n\n"
+        f"<b>Имя:</b> {name}\n"
+        f"<b>Контакты:</b> {contact}\n"
+        f"<b>Описание:</b>\n{description}"
     )
 
     url = f"https://api.telegram.org/bot{settings.telegram_bot_token}/sendMessage"
