@@ -79,4 +79,6 @@ export const philosophy = [
   { title: 'Quality', text: 'Clean code, thorough testing, and maintainable architecture that scales.' },
   { title: 'Scalability', text: 'Built to grow — from MVP to millions of users without rewrites.' },
   { title: 'UX Focus', text: 'Every interaction designed for clarity, speed, and conversion.' },
+  { title: 'Innovation', text: 'Always exploring emerging tech to give your product a competitive edge.' },
+  { title: 'Collaboration', text: 'We work as your team, not a vendor. Transparent, responsive, invested.' },
 ]

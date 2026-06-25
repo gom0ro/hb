@@ -88,7 +88,11 @@
     "scalability": "Masshtablanish",
     "scalabilityText": "MVP dan millionlab foydalanuvchilargacha qayta yozmasdan o'sishga mo'ljallangan.",
     "ux": "UX fokus",
-    "uxText": "Har bir o'zaro ta'sir aniqlik, tezlik va konversiya uchun yaratilgan."
+    "uxText": "Har bir o'zaro ta'sir aniqlik, tezlik va konversiya uchun yaratilgan.",
+    "innovation": "Innovatsiya",
+    "innovationText": "Mahsulotingizga raqobatdosh ustunlik berish uchun doimo yangi texnologiyalarni o'rganamiz.",
+    "collaboration": "Hamkorlik",
+    "collaborationText": "Pudratchi sifatida emas, balki jamoangizning bir qismi sifatida ishlaymiz. Shaffof, mas'uliyatli, manfaatdor."
   },
   "contact": {
     "getInTouch": "Aloqa",

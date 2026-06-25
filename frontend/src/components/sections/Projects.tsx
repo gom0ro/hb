@@ -1,15 +1,12 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { projects } from '../../data/content'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
 import { SectionHeader } from '../ui/SectionHeader'
-import { ProjectModal } from '../ui/ProjectModal'
 
 export function Projects() {
   const { t } = useTranslation()
-  const [selectedProject, setSelectedProject] = useState<{ project: typeof projects[0], projectKey: string } | null>(null)
 
   return (
     <section id="work" className="py-32 border-t border-white/[0.06]">
@@ -28,9 +25,8 @@ export function Projects() {
               project.title === 'SaaS Booking Platform' ? 'booking' : 'ecommerce'
             return (
             <RevealOnScroll key={project.title} delay={i * 0.1}>
-              <motion.button
-                onClick={() => setSelectedProject({ project, projectKey })}
-                className="group relative flex flex-col rounded-2xl border border-white/[0.06] bg-surface overflow-hidden h-full w-full text-left transition-all duration-500 hover:border-white/15 hover:shadow-[0_25px_80px_rgba(0,0,0,0.4)] hover:-translate-y-3 cursor-pointer"
+              <motion.div
+                className="group relative flex flex-col rounded-2xl border border-white/[0.06] bg-surface overflow-hidden h-full w-full text-left transition-all duration-500 hover:border-white/15 hover:shadow-[0_25px_80px_rgba(0,0,0,0.4)] hover:-translate-y-3"
                 whileHover={{ y: -12 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
@@ -122,21 +118,11 @@ export function Projects() {
                     ))}
                   </div>
                 </div>
-              </motion.button>
+              </motion.div>
             </RevealOnScroll>
           )})}
         </div>
       </div>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject.project}
-            projectKey={selectedProject.projectKey}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
     </section>
   )
 }

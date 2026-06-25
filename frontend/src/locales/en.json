@@ -88,7 +88,11 @@
     "scalability": "Scalability",
     "scalabilityText": "Built to grow — from MVP to millions of users without rewrites.",
     "ux": "UX Focus",
-    "uxText": "Every interaction designed for clarity, speed, and conversion."
+    "uxText": "Every interaction designed for clarity, speed, and conversion.",
+    "innovation": "Innovation",
+    "innovationText": "Always exploring emerging tech to give your product a competitive edge.",
+    "collaboration": "Collaboration",
+    "collaborationText": "We work as your team, not a vendor. Transparent, responsive, invested."
   },
   "contact": {
     "getInTouch": "Get in touch",
