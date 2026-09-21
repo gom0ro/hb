@@ -125,6 +125,7 @@
     "invalidPhone": "Noto'g'ri telefon raqami",
     "descTooShort": "Tavsif juda qisqa",
     "errorMsg": "Nimadir noto'g'ri ketdi",
+    "networkError": "Serverga ulanish imkoni bo'lmadi. U vaqtincha ishlamayotgan bo'lishi mumkin, keyinroq qayta urinib ko'ring.",
     "whatsappMessage": "Salom! Mening ismim {{name}}.\nTelefonim: {{contact}}\nLoyiha:\n{{description}}"
   },
   "footer": {

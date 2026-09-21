@@ -125,6 +125,7 @@
     "invalidPhone": "Invalid phone number",
     "descTooShort": "Description too short",
     "errorMsg": "Something went wrong",
+    "networkError": "Couldn't reach the server. It may be temporarily down, please try again later.",
     "whatsappMessage": "Hi! My name is {{name}}.\nMy phone: {{contact}}\nProject:\n{{description}}"
   },
   "footer": {

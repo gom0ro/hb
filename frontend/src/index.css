@@ -424,3 +424,13 @@ html {
 [data-theme="light"] html {
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
+
+/* Prevent double-tap zoom on touch devices */
+a,
+button,
+input,
+textarea,
+select,
+label {
+  touch-action: manipulation;
+}

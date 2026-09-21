@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
 import { SiTelegram, SiWhatsapp, SiGmail } from 'react-icons/si'
 import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { submitLead } from '../../lib/api'
+import { submitLead, NETWORK_ERROR_MESSAGE } from '../../lib/api'
 import { RevealOnScroll } from '../ui/RevealOnScroll'
 import { SectionHeader } from '../ui/SectionHeader'
 
@@ -185,6 +185,7 @@ export function ContactForm() {
         'Invalid Telegram username': t('contact.invalidTelegram'),
         'Invalid phone number': t('contact.invalidPhone') || 'Invalid phone number',
         'Description too short': t('contact.descTooShort'),
+        [NETWORK_ERROR_MESSAGE]: t('contact.networkError'),
       }
       setErrorMsg(errorMap[msg] || msg || t('contact.errorMsg'))
     }

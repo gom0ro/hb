@@ -4,9 +4,10 @@ services:
     runtime: python
     repo: https://github.com/gom0ro/hb
     plan: free
-    region: ohio
+    region: oregon
     buildCommand: pip install -r backend/requirements.txt
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -24,6 +25,6 @@ services:
 databases:
   - name: ithub-db
     plan: free
-    region: ohio
+    region: oregon
     databaseName: ithub
     ipAllowList: []
